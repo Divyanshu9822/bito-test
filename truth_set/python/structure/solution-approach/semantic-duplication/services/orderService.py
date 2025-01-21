@@ -11,23 +11,12 @@ class OrderService:
             'order_date': datetime.now()
         }
         self.orders.append(new_order)
-        formatted_date = self.format_date(new_order['order_date'], 'DD-MM-YYYY')
+        from utils.dateUtils import format_date
+        formatted_date = format_date(new_order['order_date'], 'DD-MM-YYYY')
         print(f"Order Added: {new_order['product']}, Order Date: {formatted_date}")
-    
+
     def list_orders(self):
         for order in self.orders:
-            formatted_date = self.format_date(order['order_date'])
+            formatted_date = format_date(order['order_date'])
             print(f"Order ID: {order['order_id']}, Product: {order['product']}, Order Date: {formatted_date}")
-    
-    def format_date(self, date, format='YYYY-MM-DD'):
-        year = date.year
-        month = f"{date.month:02d}"
-        day = f"{date.day:02d}"
-        
-        if format == 'MM/DD/YYYY':
-            return f"{month}/{day}/{year}"
-        elif format == 'DD-MM-YYYY':
-            return f"{day}-{month}-{year}"
-        else:
-            return f"{year}-{month}-{day}"
 \ No newline at end of file
